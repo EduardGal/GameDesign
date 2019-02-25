@@ -43,7 +43,6 @@ public class EnemyAnalyse : MonoBehaviour {
 
     private void Update()
     {
-
         if (PlayerInRange())
         {
             playersWarningTimer += Time.deltaTime;
@@ -62,9 +61,7 @@ public class EnemyAnalyse : MonoBehaviour {
         {
             spotlight.color = startingSpotlightColour;
         }
-
-        Debug.Log(spotlightOffset);
-        Debug.Log(spotlightPosition);
+        
     }
 
     bool PlayerInRange()

@@ -13,6 +13,9 @@ TagManager:
   - Player1
   - Player2
   - InteractableObject
+  - Interactable
+  - PickupPanel
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -25,10 +28,10 @@ TagManager:
   - PostProcessing
   - Obstacle
   - InteratableObject
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Player
+  - Enemy
+  - Item
   - 
   - 
   - 

@@ -28,7 +28,6 @@ public class EnemyMovement : MonoBehaviour {
 
     private void Update()
     {
-
         NavMeshAnimatorSetup();
     }
     

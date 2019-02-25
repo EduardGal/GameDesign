@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour {
     [SerializeField] float patrolWaitTime = 1.0f;
     [SerializeField] float chaseSpeed = 1.5f;
     [SerializeField] float chaseWaitTime = 5.0f;
+    [SerializeField] float stoppingDistanceFromPlayers = 7.0f;
     [SerializeField] Transform[] patrolWayPoints;
 
     private EnemySenses enemySenses;
@@ -25,14 +26,14 @@ public class EnemyAI : MonoBehaviour {
     {
         enemySenses = GetComponent<EnemySenses>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        //playerOne = GameObject.FindGameObjectWithTag("PlayerOne").transform;
-      //  playerTwo = GameObject.FindGameObjectWithTag("PlayerTwo").transform;
+        playerOne = GameObject.FindGameObjectWithTag("PlayerOne").transform;
+        playerTwo = GameObject.FindGameObjectWithTag("PlayerTwo").transform;
         playersLastLocation = GameObject.FindGameObjectWithTag("GameController").GetComponent<PlayersLastLocation>();
     }
 
     private void Update()
     {
-        if(enemySenses.isPlayerOneInSight || enemySenses.isPlayerTwoInSight)
+        if (enemySenses.isPlayerOneInSight || enemySenses.isPlayerTwoInSight)
         {
             AnalysePlayer();
         }
@@ -49,26 +50,28 @@ public class EnemyAI : MonoBehaviour {
 
     void AnalysePlayer()
     {
-
+        // EnemyAnalyse script should trigger - if the player runs out of range, the enemy should run towards their last known location before going back to patrolling
+        
     }
 
     void ChasePlayer()
     {
-        Debug.Log("Chasing player");
-
         Vector3 distanceToPlayerOne = enemySenses.playerOneLastKnownLocation - transform.position;
         Vector3 distanceToPlayerTwo = enemySenses.playerTwoLastKnownLocation - transform.position;
 
+        //TODO: ensure that the enemy runs towards the closest player to their current location
         if (distanceToPlayerOne.sqrMagnitude > 4.0f)
         {
-            Debug.Log("Chasing player one");
             navMeshAgent.destination = enemySenses.playerOneLastKnownLocation;
+            navMeshAgent.stoppingDistance = stoppingDistanceFromPlayers;
+
         }
         else if (distanceToPlayerTwo.sqrMagnitude > 4.0f)
         {
             navMeshAgent.destination = enemySenses.playerTwoLastKnownLocation;
         }
 
+        //TODO: tinker with the chaseSpeed - perhaps slow the speed when the enemy is analysing the player to allow the player to escape in time
         navMeshAgent.speed = chaseSpeed;
 
         if(navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance)
@@ -90,7 +93,7 @@ public class EnemyAI : MonoBehaviour {
         }
 
     }
-
+    //If the player escapes the enemy, they should continue to patrol
     void PatrolWaypoints()
     {
         navMeshAgent.speed = patrolSpeed;
@@ -110,9 +113,12 @@ public class EnemyAI : MonoBehaviour {
             }
         }
         else
+        {
             patrolTimer = 0.0f;
+        }
 
         navMeshAgent.destination = patrolWayPoints[currentWaypointIndex].position;
+        navMeshAgent.baseOffset = 0.25f;
     }
 
 }

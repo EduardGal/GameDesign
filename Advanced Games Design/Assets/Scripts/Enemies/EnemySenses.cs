@@ -12,7 +12,7 @@ public class EnemySenses : MonoBehaviour {
 
     public Vector3 playerOneLastKnownLocation; // This is unique to each enemy. If the player is heard but not spotted, the global location will not be effected
     public Vector3 playerTwoLastKnownLocation; // TODO: Maybe create an array instead? 
-
+    
     private NavMeshAgent navMeshAgent;
     private SphereCollider sphereCollider;
     private Animator animator; // This is the enemies animator
@@ -49,7 +49,6 @@ public class EnemySenses : MonoBehaviour {
 
     private void Update()
     {
-
         if (playersLastLocation.playerOnePosition != playerOnePreviousSighting)
         {
             playerOneLastKnownLocation = playersLastLocation.playerOnePosition;
@@ -73,11 +72,11 @@ public class EnemySenses : MonoBehaviour {
             Vector3 direction = other.transform.position - transform.position;
             float angle = Vector3.Angle(direction, transform.forward);
 
-            if(angle < FOVAngle * 0.5f)
+            if(angle < 50)
             {
                 RaycastHit hit;
 
-                if(Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, sphereCollider.radius))
+                if(Physics.Raycast(transform.position, direction, out hit, 10.0f))
                 {
                     if(hit.collider.gameObject == playerOne)
                     {

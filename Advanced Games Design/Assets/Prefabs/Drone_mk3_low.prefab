@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4002920363930434}
   - component: {fileID: 33334598296278652}
   - component: {fileID: 23276029749724916}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: Glass_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4221562033281118}
   - component: {fileID: 33302074091856078}
   - component: {fileID: 23289856186566590}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: Body_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4358313586981866}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 4324796245733840}
   - component: {fileID: 108358518803978038}
   - component: {fileID: 114752402487103600}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4909337182637666}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: SpotlightPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,13 +325,13 @@ GameObject:
   - component: {fileID: 135588289306587326}
   - component: {fileID: 195478949036632696}
   - component: {fileID: 54168094806207620}
-  - component: {fileID: 114715725663474880}
+  - component: {fileID: 3385908899232146473}
   - component: {fileID: 114040599637287462}
   - component: {fileID: 114961912878397996}
   - component: {fileID: 114815856243459544}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: Drone_mk3_low
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -438,7 +438,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114715725663474880
+--- !u!114 &3385908899232146473
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -447,14 +447,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1838735484213520}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41e96d2387d91de4f896fc73a0f5a1e3, type: 3}
+  m_Script: {fileID: 11500000, guid: c665f7cbb443b8e4eb26884eeb0e7c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   patrolSpeed: 1
   patrolWaitTime: 1.5
   chaseSpeed: 3
   chaseWaitTime: 5
+  stoppingDistanceFromPlayers: 7
   patrolWayPoints:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &114040599637287462
 MonoBehaviour:
