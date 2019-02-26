@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Lobby.unity
     guid: 1e59a2bef3b78344d99d28ed48cfc68d
   - enabled: 1
-    path: Assets/Scenes/Framandi v1.unity
-    guid: 5b6d786336be41445a9019afca9f6207
+    path: Assets/Scenes/Test Scene.unity
+    guid: 4aa0450252b2cf545bbee6cc4cea64c8
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 2c42b8074f9141645b79990965c4d09a
   m_configObjects: {}
