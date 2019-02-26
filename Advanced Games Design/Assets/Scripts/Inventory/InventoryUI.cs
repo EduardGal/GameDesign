@@ -21,6 +21,7 @@ public class InventoryUI : MonoBehaviour {
     {
         if (Input.GetButtonDown("Inventory"))
         {
+			FindObjectOfType<AudioManager>().Play("Tab");
             inventoryUI.SetActive(!inventoryUI.activeSelf);
         }
 
