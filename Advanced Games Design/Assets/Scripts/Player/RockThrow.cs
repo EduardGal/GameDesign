@@ -33,9 +33,16 @@ public class RockThrow : MonoBehaviour
 
     private void Update()
     {
+        if(Player.instance.itemInHand == null)
+        {
+            Player.instance.itemInHand = unarmed;
+        }
+
         if (Player.instance.itemInHand.name == "Rock(Clone)")
         {
             rock = Player.instance.itemInHand.GetComponent<Rigidbody>();
+			
+			FindObjectOfType<AudioManager>().Play("PickUp");
         }
         else
         {
@@ -60,6 +67,7 @@ public class RockThrow : MonoBehaviour
             {
                 //play throw animation with the launch animation event
                 anim.SetBool("throwRock", true);
+				
             }
         }
         else
