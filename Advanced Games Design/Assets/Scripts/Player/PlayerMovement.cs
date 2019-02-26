@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : Photon.MonoBehaviour
+{
 
     [SerializeField] float walkSpeed = 2.0f;
     [SerializeField] float runSpeed = 6.0f;
@@ -9,11 +10,44 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] float rotationSmoothTime = 0.2f;
     [SerializeField] float speedSmoothTime = 0.05f;
 
+    public bool devTesting = false;
+    private PhotonView PhotonView;
+    public GameObject plCam;
+    private Vector3 selfPos;
+    private Quaternion realRotation;
+    private GameObject myInvCanvas;
+
+
     private float playerSpeed, animSpeedPercent, turnSmoothVelocity, speedSmoothVelocity, currentSpeed, velocityY;
 
     Animator animator;
     CharacterController characterController;
     Transform cameraTransform;
+
+    private void Awake()
+    {
+        if (devTesting)
+        {
+            plCam.SetActive(true);
+        }
+        PhotonView = GetComponent<PhotonView>();
+        if (!devTesting && PhotonView.isMine)
+        {
+            plCam.SetActive(true);
+            if (GetComponent<PhotonView>().viewID.ToString().Contains("1"))
+            {
+                gameObject.transform.tag = "PlayerOne";
+            }
+            if (GetComponent<PhotonView>().viewID.ToString().Contains("2"))
+            {
+                gameObject.transform.tag = "PlayerTwo";
+            }
+
+        }
+
+
+    }
+
 
     void Start()
     {
@@ -22,7 +56,25 @@ public class PlayerMovement : MonoBehaviour {
         characterController = GetComponent<CharacterController>();
     }
 
-    void Update()
+
+
+    private void Update()
+    {
+        if (!devTesting)
+        {
+            if (photonView.isMine)
+            {
+                CheckInput();
+            }
+            else SmoothNetMovement();
+        }
+        else CheckInput();
+
+    }
+
+
+
+    void CheckInput()
     {
         // player inputs
         Vector2 playerInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -56,6 +108,31 @@ public class PlayerMovement : MonoBehaviour {
         if (characterController.isGrounded)
         {
             velocityY = 0;
+        }
+    }
+    private void SmoothNetMovement()
+    {
+        transform.position = Vector3.Lerp(transform.position, selfPos, Time.deltaTime * 8);
+        transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, Time.deltaTime * 8);
+    }
+
+    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            //THIS IS OUR PLAYER
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+            stream.SendNext(animator.GetFloat("speedPercent"));
+
+        }
+        else
+        {
+            //THIS IS OTHER COOP PLAYER
+            selfPos = (Vector3)stream.ReceiveNext();
+            realRotation = (Quaternion)stream.ReceiveNext();
+
+            animator.SetFloat("speedPercent", (float)stream.ReceiveNext());
         }
     }
 }

@@ -22,7 +22,7 @@ public class photonHandler : MonoBehaviour {
 
     public void moveScene()
     {
-        PhotonNetwork.LoadLevel("Main");
+        PhotonNetwork.LoadLevel("Framandi v1");
     }
 
     public void CreateNewRoom()
@@ -33,7 +33,7 @@ public class photonHandler : MonoBehaviour {
 
     private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name == "Main")
+        if(scene.name == "Framandi v1")
         {
             spawnPlayer();
         }
@@ -42,6 +42,11 @@ public class photonHandler : MonoBehaviour {
 
     private void spawnPlayer()
     {
-        PhotonNetwork.Instantiate(mainPlayer.name, mainPlayer.transform.position, mainPlayer.transform.rotation, 0);
+        int randomY;
+        int randomX;
+
+        randomX = Random.Range(40, 50);
+        randomY = Random.Range(240, 250);
+        PhotonNetwork.Instantiate(mainPlayer.name, new Vector3(randomX, 0.8f, randomY), mainPlayer.transform.rotation, 0);
     }
 }

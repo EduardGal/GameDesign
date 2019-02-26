@@ -34,6 +34,7 @@ public class PlayersLastLocation : MonoBehaviour
     private void Update()
     {
         SetAlarms();
+        
     }
 
     void SetAlarms()

@@ -18,10 +18,10 @@ public class EnemySenses : MonoBehaviour {
     private Animator animator; // This is the enemies animator
     private PlayersLastLocation playersLastLocation;
 
-    private Vector3 playerOnePreviousSighting; // The previous sighting will be compared to the lastKnownLocation to check whether the players location has changed
+    public Vector3 playerOnePreviousSighting; // The previous sighting will be compared to the lastKnownLocation to check whether the players location has changed
     private Vector3 playerTwoPreviousSighting; 
 
-    private GameObject playerOne; // Since there will be two players in the world, we will need to store them inside an array
+    public GameObject playerOne; // Since there will be two players in the world, we will need to store them inside an array
     private GameObject playerTwo;
 
     private Animator playerOneAnimator; // This is the players animator

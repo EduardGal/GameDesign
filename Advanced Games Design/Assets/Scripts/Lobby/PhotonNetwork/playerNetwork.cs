@@ -13,7 +13,7 @@ public class playerNetwork : MonoBehaviour {
     {
         Instance = this;
         photonView = GetComponent<PhotonView>();
-        PlayerName = "PLAYER#" + Random.Range(1000, 9999);
+        PlayerName = "Player " + Random.Range(01, 99);
         PhotonNetwork.sendRate = 60;
         PhotonNetwork.sendRateOnSerialize = 30;
         SceneManager.sceneLoaded += OnSceneFinishedLoading;
@@ -21,7 +21,7 @@ public class playerNetwork : MonoBehaviour {
 
     private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "SampleScene")
+        if (scene.name == "Framandi v1")
         {
             if (PhotonNetwork.isMasterClient)
                 MasterLoadedGame();
@@ -47,7 +47,7 @@ public class playerNetwork : MonoBehaviour {
     [PunRPC]
     private void RPC_LoadGameOthers()
     {
-        PhotonNetwork.LoadLevel(2);
+        PhotonNetwork.LoadLevel(1);
     }
 
     [PunRPC]
@@ -66,6 +66,7 @@ public class playerNetwork : MonoBehaviour {
     [PunRPC]
     private void RPC_CreatePlayer()
     {
+        
         float randomValue = Random.Range(40f, 45f);
         PhotonNetwork.Instantiate(player.name, new Vector3(randomValue, 2f, 230), Quaternion.identity, 0);
 

@@ -19,7 +19,7 @@ public class EnemyAnalyse : MonoBehaviour {
     NavMeshAgent navMeshAgent;
     private Animator anim;
     private BoxCollider boxCollider;
-    private Transform playerOne, playerTwo;
+    public Transform playerOne, playerTwo;
     private bool analysingPlayer;
     private float playersWarningTimer;
 
@@ -43,10 +43,11 @@ public class EnemyAnalyse : MonoBehaviour {
 
     private void Update()
     {
-        if (PlayerInRange())
+        if (PlayerOneInRange())
         {
             playersWarningTimer += Time.deltaTime;
-            AnalysePlayer();
+            AnalysePlayerOne();
+            AnalysePlayerTwo();
         }
         else
         {
@@ -64,7 +65,7 @@ public class EnemyAnalyse : MonoBehaviour {
         
     }
 
-    bool PlayerInRange()
+    bool PlayerOneInRange()
     {
         if (Vector3.Distance(transform.position, playerOne.position) < viewDistance)
         {
@@ -82,11 +83,20 @@ public class EnemyAnalyse : MonoBehaviour {
 
     }
 
-    void AnalysePlayer()
+    void AnalysePlayerOne()
     {
         playersLastLocation.playerOnePosition = playerOne.transform.position;
 
         navMeshAgent.destination = playerOne.transform.position;
+        navMeshAgent.stoppingDistance = 7.0f;
+        navMeshAgent.speed = followSpeedWhileAnalysing;
+    }
+
+    void AnalysePlayerTwo()
+    {
+        playersLastLocation.playerOnePosition = playerTwo.transform.position;
+
+        navMeshAgent.destination = playerTwo.transform.position;
         navMeshAgent.stoppingDistance = 7.0f;
         navMeshAgent.speed = followSpeedWhileAnalysing;
     }
