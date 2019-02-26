@@ -17,7 +17,7 @@ public class OnTriggerLoadScene : MonoBehaviour
     // Update is called once per frame
     void OnTriggerStay(Collider plyr)
     {
-        if (plyr.gameObject.tag == "Player")
+        if (plyr.gameObject.tag == "PlayerOne")
         {
             enterText.SetActive(true);
             if (Input.GetButtonDown("Use"))
@@ -28,7 +28,7 @@ public class OnTriggerLoadScene : MonoBehaviour
     }
     void OnTriggerExit(Collider plyr)
     {
-        if (plyr.gameObject.tag == "Player")
+        if (plyr.gameObject.tag == "PlayerOne")
         {
             enterText.SetActive(false);
         }
