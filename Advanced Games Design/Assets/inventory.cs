@@ -21,7 +21,6 @@ public class inventory : MonoBehaviour {
             HelpMessage.text = "Press E to pick up " + itemInRange.GetComponent<item>().Item.Name;
             if (Input.GetKeyDown(KeyCode.E))
             {
-				FindObjectOfType<AudioManager>().Play("PickUp");
                 itemInRange.GetComponent<onPlayerNearItem>().OnPickUp(transform.parent.gameObject);
                 
             }

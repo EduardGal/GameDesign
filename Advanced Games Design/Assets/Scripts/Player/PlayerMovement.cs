@@ -28,7 +28,6 @@ public class PlayerMovement : Photon.MonoBehaviour
     {
         if (devTesting)
         {
-			FindObjectOfType<AudioManager>().Play("Soundtrack");
             plCam.SetActive(true);
         }
         PhotonView = GetComponent<PhotonView>();
