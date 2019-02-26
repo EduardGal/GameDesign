@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Rock
   itemType: Item
-  itemIcon: {fileID: 21300000, guid: 12e93701c9887d843abe8ea17a972573, type: 3}
+  itemIcon: {fileID: 21300000, guid: f8141dad69e0d5c418b5cc60b73becd4, type: 3}
   animation: {fileID: 0}
   animationSound: {fileID: 0}
   isDefault: 0
