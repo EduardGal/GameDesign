@@ -7,22 +7,36 @@ using UnityEngine.UI;
 public class loadingScreen : Photon.MonoBehaviour
     
 {
-    AsyncOperation async;
+    AsyncOperation op;
     public bool isLoaded;
     public Image loading;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        SceneManager.LoadSceneAsync(1);
-        loading.transform.localScale = new Vector3(0.1f, -.5f, 0.3f);
+        if (SceneManager.LoadSceneAsync(1).progress < 0)
+        {
+            op = SceneManager.LoadSceneAsync(1);
+            loading.transform.localScale = new Vector3(0.1f, -.5f, 0.3f);
+       
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        async.allowSceneActivation = false;
-        isLoaded = PhotonNetwork.LoadLevelAsync(1).isDone;
+        
+        //isLoaded = PhotonNetwork.LoadLevelAsync(1).isDone;
         float progress = PhotonNetwork.LoadLevelAsync(1).progress;
         loading.transform.localScale = new Vector3(progress / 50, -.5f, 0.3f);
+        op.allowSceneActivation = false;
+        if (isLoaded == true)
+        {
+            op.allowSceneActivation = true;
+           
+        }
     }
+
+
+
+
 }
