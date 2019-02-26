@@ -17,7 +17,6 @@ public class RockBehaviour : MonoBehaviour
         {
             //Perhaps let the rock roll a little then freeze contraints?
             rb.constraints = RigidbodyConstraints.FreezeAll;
-							FindObjectOfType<AudioManager>().Play("RockThrow");
         }
     }
 }

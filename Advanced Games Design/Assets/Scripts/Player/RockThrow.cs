@@ -142,6 +142,7 @@ public class RockThrow : MonoBehaviour
     public void LaunchRock()
     {
         Debug.Log("launching ball");
+		FindObjectOfType<AudioManager>().Play("RockThrow");
 
         Physics.gravity = Vector3.up * gravity;
 
